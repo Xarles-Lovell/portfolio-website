@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import PageTransition from '@/components/common/PageTransition'
 import { loadSettings } from '@/lib/settings'
 import './globals.css'
@@ -30,6 +31,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN">
+      <head>
+        {/* Netlify Identity Widget - 用于 CMS 登录认证 */}
+        <Script src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
+      </head>
       <body>
         <PageTransition>
           {children}
