@@ -1,0 +1,120 @@
+# Decap CMS 配置文件
+
+# 后端配置
+backend:
+  name: git-gateway
+  branch: main
+
+# 媒体文件配置
+media_folder: "public/images/uploads"  # 媒体文件存储路径
+public_folder: "/images/uploads"       # 媒体文件公开访问路径
+
+# 本地开发配置（可选）
+# local_backend: true
+
+# 内容集合配置
+collections:
+  # 个人介绍
+  - name: "profile"
+    label: "个人介绍"
+    files:
+      - name: "profile"
+        label: "个人信息"
+        file: "content/profile.md"
+        fields:
+          - { label: "头像", name: "avatar", widget: "image", hint: "建议尺寸：120x120 像素" }
+          - { label: "个人介绍", name: "body", widget: "markdown", hint: "支持 Markdown 格式" }
+
+  # 作品分类
+  - name: "categories"
+    label: "作品分类"
+    folder: "content/categories"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "分类名称", name: "title", widget: "string", hint: "例如：小说封面" }
+      - { label: "URL 标识", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', '只能包含小写字母、数字和连字符'], hint: "例如：novel-cover" }
+      - { label: "排序", name: "order", widget: "number", default: 0, value_type: "int", hint: "数字越小越靠前" }
+
+  # 作品内容
+  - name: "works"
+    label: "作品"
+    folder: "content/works"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "作品标题", name: "title", widget: "string" }
+      - { label: "URL 标识", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', '只能包含小写字母、数字和连字符'] }
+      - label: "所属分类"
+        name: "category"
+        widget: "relation"
+        collection: "categories"
+        search_fields: ["title"]
+        value_field: "slug"
+        display_fields: ["title"]
+      - { label: "作品图片", name: "image", widget: "image", hint: "建议尺寸：1200x900 像素（4:3 比例）" }
+      - { label: "排序", name: "order", widget: "number", default: 0, value_type: "int", hint: "数字越小越靠前" }
+      - { label: "项目简介", name: "body", widget: "markdown", hint: "支持 Markdown 格式" }
+      - label: "交互热点"
+        name: "hotspots"
+        widget: "list"
+        required: false
+        hint: "在作品图片上添加可交互的设计说明热点"
+        fields:
+          - { label: "热点 ID", name: "id", widget: "string", hint: "唯一标识，例如：hotspot-1" }
+          - label: "形状"
+            name: "shape"
+            widget: "select"
+            options: ["rectangle", "circle"]
+            default: "rectangle"
+          - label: "位置"
+            name: "position"
+            widget: "object"
+            fields:
+              - { label: "X 坐标 (%)", name: "x", widget: "number", value_type: "float", min: 0, max: 100, step: 0.1, hint: "0-100，表示距离左边的百分比" }
+              - { label: "Y 坐标 (%)", name: "y", widget: "number", value_type: "float", min: 0, max: 100, step: 0.1, hint: "0-100，表示距离顶部的百分比" }
+              - { label: "宽度 (%)", name: "width", widget: "number", value_type: "float", min: 0, max: 100, step: 0.1, hint: "0-100，表示宽度百分比" }
+              - { label: "高度 (%)", name: "height", widget: "number", value_type: "float", min: 0, max: 100, step: 0.1, hint: "0-100，表示高度百分比" }
+          - { label: "说明文字", name: "description", widget: "text", hint: "鼠标悬停时显示的设计说明" }
+
+  # 联系方式
+  - name: "contact"
+    label: "联系方式"
+    files:
+      - name: "contact"
+        label: "联系信息"
+        file: "content/contact.json"
+        extension: "json"
+        format: "json"
+        fields:
+          - label: "联系方式列表"
+            name: "items"
+            widget: "list"
+            fields:
+              - label: "图标"
+                name: "icon"
+                widget: "select"
+                options: ["email", "wechat", "weibo", "instagram", "behance", "dribbble", "linkedin", "phone"]
+              - { label: "显示标签", name: "label", widget: "string", hint: "例如：邮箱" }
+              - { label: "内容", name: "value", widget: "string", hint: "邮箱地址、链接或文本" }
+
+  # 网站设置
+  - name: "settings"
+    label: "网站设置"
+    files:
+      - name: "general"
+        label: "通用设置"
+        file: "content/settings.json"
+        extension: "json"
+        format: "json"
+        fields:
+          - { label: "网站标题", name: "siteTitle", widget: "string" }
+          - { label: "私密模式", name: "privateMode", widget: "boolean", default: true, hint: "开启后网站不会被搜索引擎收录" }
+          - label: "访客统计"
+            name: "analytics"
+            widget: "object"
+            fields:
+              - { label: "启用统计", name: "enabled", widget: "boolean", default: false }
+              - { label: "Google Analytics ID", name: "googleAnalyticsId", widget: "string", required: false, hint: "例如：G-XXXXXXXXXX" }

@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "icon": "email",
+      "label": "邮箱",
+      "value": "your.email@example.com"
+    },
+    {
+      "icon": "wechat",
+      "label": "微信",
+      "value": "your-wechat-id"
+    },
+    {
+      "icon": "weibo",
+      "label": "微博",
+      "value": "https://weibo.com/your-profile"
+    }
+  ]
+}
