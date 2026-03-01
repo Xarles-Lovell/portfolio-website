@@ -13,7 +13,7 @@ const nextConfig = {
   // 如果使用 GitHub 项目页面（而非用户页面），需要配置 basePath
   // 例如：basePath: '/portfolio-website'
   // 如果使用用户页面（username.github.io），则不需要 basePath
-  // basePath: '',
+  basePath: '/portfolio-website',
   
   // 启用 trailing slash，确保 URL 以 / 结尾
   trailingSlash: true,
