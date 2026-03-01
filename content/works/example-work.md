@@ -1,18 +1,18 @@
 ---
-title: "示例作品标题"
-slug: "example-work"
-category: "novel-cover"
-image: /images/uploads/example-work.jpg
+title: 2023.1.14我在重开后封神
+slug: example-work
+category: comic-cover
+image: /images/uploads/2023.1.14我在重开后封神.jpg
 order: 1
 hotspots:
-  - id: "hotspot-1"
-    shape: "rectangle"
+  - id: hotspot-1
+    shape: rectangle
     position:
-      x: 25.0
-      y: 30.0
-      width: 20.0
-      height: 15.0
-    description: "这里是设计亮点说明示例"
+      x: 25
+      y: 30
+      width: 20
+      height: 15
+    description: 这里是设计亮点说明示例
 ---
 
 这是作品的项目简介。
