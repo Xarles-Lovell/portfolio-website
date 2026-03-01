@@ -1,5 +1,5 @@
 ---
-avatar: /images/avatar.jpg
+avatar: /images/uploads/头像-金渐层-改边缘.png
 ---
 
 你好，我是 [你的名字]，一名专注于 [设计领域] 的平面设计师。
